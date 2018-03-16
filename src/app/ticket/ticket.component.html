@@ -1,0 +1,76 @@
+<div class="table-container mat-typography">
+
+  <h2>Tickets</h2>
+
+  <div class="table-header">
+    <form [formGroup]="searchForm" novalidate>
+
+      <mat-form-field class="table-search-input">
+        <input matInput type="text" formControlName="searchInput" placeholder="Búsqueda">
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-select placeholder="Estado" formControlName="stateSelect">
+          <mat-option *ngFor="let element of states" [value]="element.id">
+            {{ element.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" (click)="search()">Buscar</button>
+      <button mat-raised-button color="primary" type="reset" (click)="clear()">Limpiar</button>
+      <a mat-raised-button color="accent" routerLink="/ticket/detail/new">Crear</a>
+
+    </form>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortTable($event)">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Título </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{getStateName(element.state)}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Creado </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.created_at.toLocaleString('es-Cl')}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef > Acciones </mat-header-cell>
+      <mat-cell class="button-row" *matCellDef="let element">
+        <button mat-icon-button routerLink="/ticket/detail/{{element.id}}">
+          <mat-icon aria-hidden="true" title="Editar">edit</mat-icon>
+        </button>
+       </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+
+  <mat-paginator
+   [length]=paginatorOptions.length
+   [pageSize]=paginatorOptions.pageSize
+   [pageSizeOptions]=paginatorOptions.pageSizeOptions
+   (page)="pageEvent($event)">
+  </mat-paginator>
+</div>

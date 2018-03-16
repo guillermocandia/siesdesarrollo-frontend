@@ -1,0 +1,24 @@
+<mat-toolbar *ngIf="showMenu" color="primary">
+  <button mat-button>
+    Sies Desarrollo
+  </button>
+  <button mat-button routerLink="/ticket">
+    <mat-icon aria-hidden="true">assignment</mat-icon>
+    <span>Tickets</span>
+  </button>
+  <button mat-button routerLink="/state">
+    <mat-icon aria-hidden="true">settings</mat-icon>
+    <span>Estados</span>
+  </button>
+
+  <span class="fill-remaining-space"></span>
+
+  <button mat-button>
+    <mat-icon aria-hidden="true">person</mat-icon>
+    {{ user ? user.username: '' }}
+  </button>
+  <button mat-button (click)="logout()">
+    <mat-icon aria-hidden="true">exit_to_app</mat-icon>
+    Salir
+  </button>
+</mat-toolbar>

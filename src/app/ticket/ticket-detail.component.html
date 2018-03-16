@@ -1,0 +1,42 @@
+<div class="form-container mat-typography">
+
+  <h2>Editar Ticket</h2>
+
+  <div class="table-header">
+
+    <form [formGroup]="ticketForm" class="form" novalidate>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Título" formControlName="title" required>
+        <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">
+          Titulo <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Estado" formControlName="stateSelect">
+          <mat-option [value]="null"></mat-option>
+          <mat-option *ngFor="let element of states" [value]="element.id">
+            {{ element.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Descripción" formControlName="description">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="!new">
+        <input matInput type="text" placeholder="Creado" formControlName="created_at">
+      </mat-form-field>
+
+      <div class="spacer"></div>
+      <div class="button-row">
+        <a mat-raised-button color="primary" type="submit" (click)="save()" [disabled]="ticketForm.invalid">Guardar</a>
+        <a mat-raised-button color="primary" type="reset" (click)="cancel()">Cancelar</a>
+      </div>
+    </form>
+
+  </div>
+
+</div>
