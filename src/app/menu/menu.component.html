@@ -1,24 +1,35 @@
-<mat-toolbar *ngIf="showMenu" color="primary">
-  <button mat-button>
-    Sies Desarrollo
-  </button>
-  <button mat-button routerLink="/ticket">
-    <mat-icon aria-hidden="true">assignment</mat-icon>
-    <span>Tickets</span>
-  </button>
-  <button mat-button routerLink="/state">
-    <mat-icon aria-hidden="true">settings</mat-icon>
-    <span>Estados</span>
+<nav class="navbar navbar-expand-md navbar-dark">
+  <a class="navbar-brand" href="#">Sies Desarrollo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
   </button>
 
-  <span class="fill-remaining-space"></span>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <button mat-button routerLink="/ticket">
+          <mat-icon aria-hidden="true">assignment</mat-icon>
+          <span>Tickets</span>
+        </button>      </li>
+      <li class="nav-item">
+        <button mat-button routerLink="/state">
+          <mat-icon aria-hidden="true">settings</mat-icon>
+          <span>Estados</span>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button mat-button>
+          <mat-icon aria-hidden="true">person</mat-icon>
+          {{ user ? user.username: '' }}
+        </button>
+      </li>
+      <li class="nav-item">
+        <button mat-button (click)="logout()">
+          <mat-icon aria-hidden="true">exit_to_app</mat-icon>
+          Salir
+        </button>
+      </li>
+    </ul>
 
-  <button mat-button>
-    <mat-icon aria-hidden="true">person</mat-icon>
-    {{ user ? user.username: '' }}
-  </button>
-  <button mat-button (click)="logout()">
-    <mat-icon aria-hidden="true">exit_to_app</mat-icon>
-    Salir
-  </button>
-</mat-toolbar>
+  </div>
+</nav>
