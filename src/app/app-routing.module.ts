@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: 'ticket/detail/:id' , component: TicketDetailComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/ticket', pathMatch: 'full' },
+  { path: '**', redirectTo: '/ticket', pathMatch: 'full' }
 ];
-
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
